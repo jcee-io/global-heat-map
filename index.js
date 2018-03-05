@@ -1,6 +1,6 @@
 const height = 800;
 const width = 1300;
-const padding = 120;
+const padding = 160;
 
 const url = 'https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/global-temperature.json';
 
@@ -14,7 +14,6 @@ const tooltip = d3.select('body')
   .append('div')
   .style('opacity', 0)
   .classed('tooltip', true);
-
 
 const axisConfig = (xScale, yScale) => {
 	const yAxis = d3.axisLeft(yScale);
