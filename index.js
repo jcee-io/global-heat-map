@@ -55,6 +55,13 @@ d3.json(url, (err, { monthlyVariance, baseTemperature }) => {
     .data(monthlyVariance)
     .enter()
     .append('rect')
+    .attr('x', d => xScale(d.year))
+    .attr('y', d => yScale(d.month) - barHeight / 2)
+    .attr('height', barHeight)
+    .attr('width', barWidth)
+    .attr('fill', 'whitesmoke')
+    .transition()
+    .duration(1500)
     .attr('fill', ({ temp }) => {
     	if (temp > 12.7)      return '#802000';
     	else if (temp > 11.6) return '#cc3300';
@@ -68,10 +75,6 @@ d3.json(url, (err, { monthlyVariance, baseTemperature }) => {
     	else if (temp > 2.7)  return '#2b1ed5';
 
  			return 'purple';
-    })
-    .attr('x', d => xScale(d.year))
-    .attr('y', d => yScale(d.month) - barHeight / 2)
-    .attr('height', barHeight)
-    .attr('width', barWidth);
+    });
   tooltipConfig();
 });

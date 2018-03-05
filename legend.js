@@ -10,9 +10,12 @@ svg.selectAll('.key')
   .classed('key', true)
   .attr('x', width - padding / 1.5)
   .attr('y', (d, i) => height - padding * 1.15 - (i * specHeight))
-  .attr('fill', d => d)
   .attr('height', specHeight)
-  .attr('width', specWidth);
+  .attr('width', specWidth)
+  .attr('fill', 'whitesmoke')
+  .transition()
+  .duration(1500)
+  .attr('fill', d => d);
 
 svg.selectAll('.key-data')
   .data(tempRange)
