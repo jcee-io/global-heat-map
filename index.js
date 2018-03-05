@@ -10,10 +10,6 @@ const svg = d3.select('svg')
   .attr('width', width)
   .attr('height', height);
 
-const tooltip = d3.select('body')
-  .append('div')
-  .style('opacity', 0)
-  .classed('tooltip', true);
 
 const axisConfig = (xScale, yScale) => {
 	const yAxis = d3.axisLeft(yScale);
@@ -34,28 +30,6 @@ const axisConfig = (xScale, yScale) => {
 	  .call(xAxis);
 };
 
-const tooltipConfig = data => {
-	svg.selectAll('rect')
-	  .on('mouseover', d => {
-	  	const date = new Date(d.month + ' 1 2018');
-	  	const month = d3.timeFormat('%b')(date);
-
-	  	tooltip
-	  	  .style('opacity', 0.70)
-	  	  .style('left', `${d3.event.x}px`)
-	  	  .style('top', `${d3.event.y}px`)
-	  	  .html(`
-	  	  	<strong>
-		  	  	<p>${month} - ${d.year}</p>
-		  	  	<p>${d.temp} C</p>
-	  	  	</strong>
-	  	  	<p>${d.variance} C</p>
-	  	  `);
-	  })
-	  .on('mouseout', () => {
-	  	tooltip.style('opacity', 0);
-	  });
-};
 
 
 d3.json(url, (err, { monthlyVariance, baseTemperature }) => {
@@ -99,5 +73,5 @@ d3.json(url, (err, { monthlyVariance, baseTemperature }) => {
     .attr('y', d => yScale(d.month) - barHeight / 2)
     .attr('height', barHeight)
     .attr('width', barWidth);
-  tooltipConfig(monthlyVariance);
+  tooltipConfig();
 });
