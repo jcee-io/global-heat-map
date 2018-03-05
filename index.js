@@ -51,10 +51,11 @@ d3.json(url, (err, { monthlyVariance, baseTemperature }) => {
 
   
 
-  svg.selectAll('rect')
+  svg.selectAll('.bar')
     .data(monthlyVariance)
     .enter()
     .append('rect')
+    .classed('bar', true)
     .attr('x', d => xScale(d.year))
     .attr('y', d => yScale(d.month) - barHeight / 2)
     .attr('height', barHeight)

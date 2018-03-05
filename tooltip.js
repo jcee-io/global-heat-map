@@ -10,7 +10,6 @@ const tooltipConfig = () => {
 	  	const month = d3.timeFormat('%b')(date);
 
 	  	tooltip
-	  	  .style('opacity', 0.70)
 	  	  .style('left', `${d3.event.x}px`)
 	  	  .style('top', `${d3.event.y}px`)
 	  	  .html(`
@@ -19,9 +18,13 @@ const tooltipConfig = () => {
 		  	  	<p>${d.temp} C</p>
 	  	  	</strong>
 	  	  	<p>${d.variance} C</p>
-	  	  `);
+	  	  `)
+	  	  .transition(150)
+	  	  .style('opacity', 0.70);
 	  })
 	  .on('mouseout', () => {
-	  	tooltip.style('opacity', 0);
+	  	tooltip
+	  		.transition(150)
+	  		.style('opacity', 0);
 	  });	
 };
